@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>進階圈圈叉叉</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(11, auto);
+            justify-content: center;
+            gap: 5px;
+        }
+        .row-divider {
+            grid-column: span 11;
+            border-top: 2px solid black;
+            margin: 5px 0;
+        }
+        button.cell {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            text-align: center;
+            background-color: white;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        button.cell.marked {
+            background-color: #d0f0ff; /* 標記玩家可下的位置 */
+        }
+        button.cell.taken {
+            cursor: not-allowed;
+            background-color: lightgray;
+        }
+        h1, p, select {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>進階圈圈叉叉</h1>
+    <p id="instructions">輪到玩家 X 下棋</p>
+    <select id="modeSelector">
+        <option value="player">玩家對玩家</option>
+        <option value="ai">玩家對電腦</option>
+    </select>
+    <div id="gameBoard"></div>
+    <p id="result"></p>
+    <script src="game.js"></script>
+</body>
+</html>
+
