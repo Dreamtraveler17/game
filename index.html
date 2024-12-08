@@ -1,56 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>進階圈圈叉叉</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #gameBoard {
-            display: grid;
-            grid-template-columns: repeat(11, auto);
-            justify-content: center;
-            gap: 5px;
-        }
-        .row-divider {
-            grid-column: span 11;
-            border-top: 2px solid black;
-            margin: 5px 0;
-        }
-        button.cell {
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-            text-align: center;
-            background-color: white;
-            border: 1px solid black;
-            cursor: pointer;
-        }
-        button.cell.marked {
-            background-color: #d0f0ff; /* 標記玩家可下的位置 */
-        }
-        button.cell.taken {
-            cursor: not-allowed;
-            background-color: lightgray;
-        }
-        h1, p, select {
-            margin: 10px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      #gameBoard {
+        display: grid;
+        grid-template-columns: repeat(11, auto);
+        justify-content: center;
+        gap: 5px;
+        display: none; /* 初始時隱藏遊戲版*/
+      }
+      .row-divider {
+        grid-column: span 11;
+        border-top: 2px solid black;
+        margin: 5px 0;
+      }
+      button.cell {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        text-align: center;
+        background-color: white;
+        border: 1px solid black;
+        cursor: pointer;
+      }
+      button.cell.marked {
+        background-color: #d0f0ff; /* 標記玩家可下的位置 */
+      }
+      button.cell.taken {
+        cursor: not-allowed;
+        background-color: lightgray;
+      }
+      h1,
+      p,
+      select,
+      button {
+        margin: 10px;
+      }
+      #rules {
+        margin: 20px;
+        font-size: 18px;
+        text-align: left;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+      }
+      #startButton {
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      #score {
+        display: none;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>進階圈圈叉叉</h1>
+
+    <!-- 規則顯示區 -->
+    <div id="rules">
+      <h2>遊戲規則</h2>
+      <ol>
+        <li>可選擇玩家對玩家或玩家對電腦模式。</li>
+        <li>
+          當玩家在小九宮格內的某處下棋時，下個玩家僅能下在大九宮格內對應的小九宮格中。例如：玩家
+          A 下在正中間小九宮格內的正中間，則玩家 B 僅能下在正中間小九宮格。
+        </li>
+        <li>在該小九宮格內先連線者即視為佔領該小九宮格。</li>
+        <li>勝利條件為比較各自最後的總連線數。</li>
+        <li>
+          若是玩家原先僅能下的小九宮格內已無位置，則該回合該玩家為自由棋，可下在任意九宮格內。
+        </li>
+        <li>玩家不可連續兩回合下在小九宮格的中間。</li>
+      </ol>
+      <button id="startButton">開始遊戲</button>
+    </div>
+
     <p id="instructions">輪到玩家 X 下棋</p>
+    <p id="score">比分</p>
     <select id="modeSelector">
-        <option value="player">玩家對玩家</option>
-        <option value="ai">玩家對電腦</option>
+      <option value="player">玩家對玩家</option>
+      <option value="ai">玩家對電腦</option>
     </select>
     <div id="gameBoard"></div>
     <p id="result"></p>
-    <script src="game.js"></script>
-</body>
+    <script src="tictactoe_sum_ver4.js"></script>
+
+    <script>
+      // 按下 "開始遊戲" 按鈕後隱藏規則並顯示遊戲板
+      document
+        .getElementById("startButton")
+        .addEventListener("click", function () {
+          document.getElementById("rules").style.display = "none"; // 隱藏規則區域
+          document.getElementById("gameBoard").style.display = "grid"; // 顯示遊戲板
+          document.getElementById("score").style.display = "grid"; // 顯示比分
+        });
+    </script>
+  </body>
 </html>
 
